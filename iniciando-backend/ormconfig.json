@@ -6,9 +6,9 @@
   "password": "danu1985",
   "database": "gostack_gobarber",
   "migrations":[
-    "./src/databases/migrations/*.ts"
+    "./src/database/migrations/*.ts"
   ],
   "cli":{
-    "migrationsDir":"./src/databases/migrations"
+    "migrationsDir":"./src/database/migrations"
   }
 }
