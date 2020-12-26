@@ -6,6 +6,11 @@
 # testing
 /coverage
 
+#files
+tmp/*
+!tmp/.gitkeep
+temp/
+
 # production
 /build
 
