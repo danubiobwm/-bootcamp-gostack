@@ -12,7 +12,7 @@ sessionsRouter.post('/', async (resquest, response) => {
 
   const {user, token} = await authenticateUser.execute({ email, password});
 
-  const userInSessin={
+  const userWithoutPassword={
     id:user.id,
     name:user.name,
     email:user.email,
@@ -20,7 +20,7 @@ sessionsRouter.post('/', async (resquest, response) => {
     updated_at: user.updated_at,
   }
 
-    return response.json({userInSessin, token});
+    return response.json({user: userWithoutPassword, token});
 
 
 });

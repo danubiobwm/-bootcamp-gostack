@@ -7,9 +7,10 @@ import * as Yup from 'yup';
 import { AuthContext } from '../../context/AuthContext';
 import getValidationErrors from '../../utils/getValidationErrors';
 
+import logoImg from '../../assets/logo.svg';
+
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import Logo from '../../assets/logo.svg';
 
 import { Container, Content, Background } from './styles';
 
@@ -21,7 +22,7 @@ interface SignInFormData {
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const { signIn } = useContext(AuthContext);
+  const { user, signIn } = useContext(AuthContext);
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -38,7 +39,11 @@ const SignIn: React.FC = () => {
         await schema.validate(data, {
           abortEarly: false,
         });
-        signIn({ email: data.email, password: data.password });
+
+        await signIn({
+          email: data.email,
+          password: data.password,
+        });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -49,10 +54,11 @@ const SignIn: React.FC = () => {
     },
     [signIn],
   );
+
   return (
     <Container>
       <Content>
-        <img src={Logo} alt="GoBarber" />
+        <img src={logoImg} alt="GoBarber" />
 
         <Form ref={formRef} onSubmit={handleSubmit}>
           <h1>Faça seu logon</h1>
