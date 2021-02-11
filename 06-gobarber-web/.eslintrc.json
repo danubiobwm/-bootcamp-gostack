@@ -29,20 +29,12 @@
     "prettier"
   ],
   "rules": {
-    "@typescript-eslint/ban-types": ["off", {
-      "types": {
-          "a": null,
-          "A": null,
-          "object": null,
-          "Object": null
-       }
- }
-],
+    "no-unused-expressions": "off",
+    "@typescript-eslint/no-unused-expressions": "off",
     "camelcase": "off",
-    "react/prop-types":"off",
-    "no-unused-expressions":"off",
     "react/jsx-one-expression-per-line": "off",
-    "react/jsx-props-no-spreading":"off",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
