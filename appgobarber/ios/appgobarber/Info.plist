@@ -56,6 +56,10 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>RobotoSlab-VariableFont_wght.ttf</string>
+		<string>RobotoSlab-Medium.ttf</string>
+		<string>RobotoSlab-Regular.ttf</string>
+		<string>RobotoSlab-SemiBold.ttf</string>
+		<string>Feather.ttf</string>
 	</array>
 </dict>
 </plist>
