@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   TextInput,
+  Alert,
 } from 'react-native';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -22,15 +23,59 @@ import {
   CreateAccountButton,
   CreateAccountButtonText,
 } from './styles';
+import * as Yup from 'yup';
+import getValidationErrors from '../../utils/getValidationErrors';
+
+import { useAuth } from '../../hooks/auth';
+
+interface SignInFormData {
+  email: string;
+  password: string;
+}
 
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
   const navigation = useNavigation();
 
-  const handleSignIn = useCallback((data: object) => {
-    console.log(data);
-  }, []);
+  const { signIn } = useAuth();
+
+  const handleSignIn = useCallback(
+    async (data: SignInFormData) => {
+      try {
+        formRef.current?.setErrors({});
+
+        const schema = Yup.object().shape({
+          email: Yup.string()
+            .email('Digite um e-mail válido')
+            .required('E-mail obrigatório'),
+          password: Yup.string().required('Senha obrigatória'),
+        });
+
+        await schema.validate(data, {
+          abortEarly: false,
+        });
+
+        await signIn({
+          email: data.email,
+          password: data.password,
+        });
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+
+          formRef.current?.setErrors(errors);
+          return;
+        }
+
+        Alert.alert(
+          'Error na autenticação',
+          'Ocorreu um erro ao fazer login, cheque as credenciais',
+        );
+      }
+    },
+    [Alert],
+  );
 
   return (
     <>
@@ -48,7 +93,7 @@ const SignIn: React.FC = () => {
             <View>
               <Title>Faça seu Logo</Title>
             </View>
-            <Form ref={formRef} onSubmit={(data) => handleSignIn(data)}>
+            <Form ref={formRef} onSubmit={data => handleSignIn(data)}>
               <Input
                 name="email"
                 icon="mail"
