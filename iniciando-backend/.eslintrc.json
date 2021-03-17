@@ -40,6 +40,12 @@
     "import/prefer-default-export": "off",
     "camelcase": "off",
     "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/interface-name-prefix": [
+      "error",
+      {
+        "prefixWithI": "always"
+      }
+    ],
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/no-unused_vars": [
       "error",
