@@ -1,10 +1,11 @@
-import AppError from '@shared/errors/AppError';
-
+import 'reflect-metadata';
 import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentsRepository';
 import CreateAppointmentService from './CreateAppointmentService';
 
-let fakeAppointmentsRepository: FakeAppointmentsRepository;
+import AppError from '@shared/errors/AppError';
+
 let createAppointment: CreateAppointmentService;
+let fakeAppointmentsRepository: FakeAppointmentsRepository;
 
 describe('CreateAppointment', () => {
   beforeEach(() => {
